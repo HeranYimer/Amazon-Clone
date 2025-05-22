@@ -7,7 +7,7 @@ function LayOut({ children }) {
       <Header />
       {children}
     </div>
-  );
+  )
 }
 
 export default LayOut;

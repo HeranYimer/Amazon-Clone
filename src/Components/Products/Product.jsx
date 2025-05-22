@@ -5,10 +5,9 @@ import ProductCard from './ProductCard'
 function Product() {
    const [products, setProducts]= useState([])
    useEffect(()=>{
-axios
-  .get("https://api.escuelajs.co/api/v1/products")
+axios.get("https://fakestoreapi.com/products")
   .then((res) => {
-    console.log(res.data);
+    // console.log(res.data);
     setProducts(res.data);
   })
   .catch((err) => {
@@ -19,9 +18,11 @@ axios
     <section className={classes.product_container}
     >
 {
-products.map((singleProduct)=>(
-<ProductCard Product={singleProduct} key={singleProduct.id}/>
-))
+products.map((singleProduct)=>{
+
+return <ProductCard product={singleProduct} key={singleProduct.id} />;
+}
+)
 }
     </section>
   )

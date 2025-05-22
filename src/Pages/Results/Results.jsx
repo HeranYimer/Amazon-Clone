@@ -1,12 +1,40 @@
-import React from 'react'
-import LayOut from '../../Components/LayOut/LayOut';
+import React, { useState, useEffect } from "react";
+import LayOut from "../../Components/LayOut/LayOut";
+import { useParams } from "react-router-dom";
+import classes from "./Results.module.css";
+import axios from "axios";
+import ProductCard from "../../Components/Products/ProductCard";
+import { productUrl } from "../../API/endPoints";
 
 function Results() {
+  const [results, setResults] = useState([]);
+  const { categoryName } = useParams();
+  console.log("Category name from URL:", categoryName);
+  useEffect(() => {
+    axios
+      .get(`${productUrl}/products/category/${categoryName}`)
+      .then((res) => {
+        setResults(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <LayOut>
-      <div>Result</div>
+      <section>
+        <h1 style={{ padding: "30px" }}>Results</h1>
+        <p style={{ padding: "30px" }}>Category / {categoryName}</p>
+        <hr />
+        <div className={classes.products_container}>
+          {results?.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
     </LayOut>
   );
 }
 
-export default Results
+export default Results;
