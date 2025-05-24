@@ -13,6 +13,11 @@
   display: flex;
   align-items: center;
 }
+.fixed{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 .logo__container,
 .delivery,
 .search,
