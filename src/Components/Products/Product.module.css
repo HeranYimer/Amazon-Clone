@@ -73,5 +73,6 @@ height: auto;
     .product_flexed{
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 }

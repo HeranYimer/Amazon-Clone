@@ -7,9 +7,10 @@ import { RiArrowDropDownFill } from "react-icons/ri";
 import classes from "./Header.module.css";
 import LowerHeader from "../LowerHeader/LowerHeader";
 import { DataContext } from "../DataProvider/DataProvider";
+import { auth } from "../../Utility/firebase";
 function Header() {
 
-  const [{basket}, dispatch]=useContext(DataContext)
+  const [{user ,basket}, dispatch]=useContext(DataContext)
   const totalItem=basket?.reduce((amount, item)=>{
     return item.amount+amount
   },0)
@@ -42,7 +43,7 @@ function Header() {
               <option value="">All</option>
             </select>
             <input type="text" placeholder="Search Amazon" />
-            <BsSearch size={25} />
+            <BsSearch size={39} />
           </div>
           {/* right side link */}
           <div className={classes.order_container}>
@@ -56,10 +57,19 @@ function Header() {
               </select>
             </Link>
             {/* three components */}
-            <Link to="/auth">
+            <Link to={!user && "/auth"}>
               <div>
-                <p>Hello, sign in</p>
+                {user ? (
+                  <>
+                    <p>Hello {user?.email?.split("@")[0]}</p>
+                    <span onClick={()=>auth.signOut()}>Sign Out</span>
+                  </>
+                ) : (
+                  <>
+                  <p>Hello, sign in</p>
                 <span>Account & Lists</span>
+                </>
+                )}
                 <RiArrowDropDownFill />
               </div>
             </Link>
