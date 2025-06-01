@@ -18,12 +18,20 @@
 .flex img{
     width: 80px !important;
 }
-.flex{
+.flex div{
     height: auto !important;
 }
 .payment_card_container{
     max-width: 350px;
     width: 100%;
+}
+.payment_price{
+    padding: 20px;
+}
+.payment_price > div {
+display: flex;
+font-size: 16px;
+gap: 10px;
 }
 .payment_details button{
 margin-top: 15px;
@@ -37,8 +45,16 @@ cursor: pointer;
 .payment_details button:hover{
     background-color: var(--primary-color);
 }
-.payment_price > div {
-display: flex;
-font-size: 16px;
-gap: 10px;
+
+.loading{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    color: rgb(5,52,52);
+}
+@media screen and (max-width:768px){
+    .flex{
+        flex-direction: column;
+    }
 }
